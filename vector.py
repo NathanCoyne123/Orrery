@@ -20,7 +20,7 @@ class Vector(object):
         return Vector(X,Y,Z)
     
     @staticmethod
-    def subtract(a,b)
+    def subtract(a,b):
         X = a.x - b.x
         Y = a.y - b.y
         Z = a.z - b.z

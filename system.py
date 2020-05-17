@@ -7,17 +7,11 @@ class System(object):
         self.name = name
         self.bodies = bodies
 
-    def update(self,time_interval):
-        accelerations = [calcAcceleration(body) for body in self.bodies]
-        for body,acceleration in zip(self.bodies,accelerations):
-            body.updateWithAcceleration(time_interval,acceleration)
-        
-
     def calcAcceleration(self,body):
-        a_total == 0
+        a_vec_total = Vector(0,0,0)
         for other_body in self.bodies:
             r_vec = Vector.subtract(other_body.position,body.position)
-            r = Vector.absolute(rvec)
+            r = Vector.absolute(r_vec)
             if r == 0.0:
                 continue
             m = other_body.mass
@@ -25,8 +19,14 @@ class System(object):
 
             a_vec = Vector.mult(G*m/r**3, r_vec)
 
-            a_total = Vector.add( a_total, a_vec)
-        return a_total
+            a_vec_total = Vector.add( a_vec_total, a_vec)
+        return a_vec_total
+            
+
+    def update(self,time_interval):
+        accelerations = [self.calcAcceleration(body) for body in self.bodies]
+        for body,acceleration in zip(self.bodies,accelerations):
+            body.updateWithAcceleration(time_interval,acceleration)
             
             
             
