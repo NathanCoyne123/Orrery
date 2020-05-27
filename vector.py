@@ -1,4 +1,5 @@
 import math
+from functools import reduce
 
 class Vector(object):
     def __init__(self, x, y, z):
@@ -18,7 +19,12 @@ class Vector(object):
         Y = a.y + b.y
         Z = a.z + b.z
         return Vector(X,Y,Z)
-    
+
+    @staticmethod
+    def sumOfVectors(vectors):
+        return reduce(Vector.add,vectors)
+        
+        
     @staticmethod
     def subtract(a,b):
         X = a.x - b.x

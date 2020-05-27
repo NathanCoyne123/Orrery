@@ -32,5 +32,22 @@ class CelestialBody(object):
         self.acceleration = acceleration
         self.update(time_interval)
 
+    def calcSpeed(self):
+        speed = Vector.absolute(self.velocity)
+        return speed
+
+    def calcMomentum(self,mass,velocity):
+        return Vector.mult(mass,velocity)
+    
+    def calcKineticEnergy(self):
+        velocity_squared = Vector.dot(self.velocity,self.velocity) 
+        return 0.5 * self.mass * velocity_squared
+        
+    
+    @staticmethod
+    def calcDistance(body1,body2):
+        distance = Vector.absolute(Vector.subtract(body2.position,body1.position))
+        return distance
+
  
         

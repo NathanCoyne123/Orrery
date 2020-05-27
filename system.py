@@ -28,6 +28,11 @@ class System(object):
         for body,acceleration in zip(self.bodies,accelerations):
             body.updateWithAcceleration(time_interval,acceleration)
             
+    @staticmethod
+    def nearly_equal(a,b,sig_fig=5):
+            return ( a==b or 
+            int(a*10**sig_fig) == int(b*10**sig_fig))
+            
             
             
     

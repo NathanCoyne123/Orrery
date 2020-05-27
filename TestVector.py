@@ -23,6 +23,9 @@ class TestVector(unittest.TestCase):
 
     def test_ShouldFindModOfVector(self):
         self.assertTrue( Vector.absolute(Vector(1,2,2)) == 3)
+
+    def test_ShouldAddTogetherAnyNumberOfVectors(self):
+        self.assertTrue(Vector.sumOfVectors([self.nonZero,self.nonZero,self.nonZero]) == Vector(9,12,15))
        
 if __name__ == '__main__':
     unittest.main()

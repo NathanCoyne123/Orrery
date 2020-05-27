@@ -1,5 +1,6 @@
 import unittest_vector
 import unittest
+from system import System
 
 from vector import Vector
 from celestial_body import CelestialBody
@@ -44,6 +45,21 @@ class TestCelestialBody(unittest_vector.VectorTestCase):
             
         self.assertAlmostEqual( body.position, Vector(14.5, 9.5, 8.5))
         self.assertAlmostEqual( body.velocity, Vector(15,10,5))
+
+    def test_ShouldReturnMomentumWhenGivenMassAndVelocity(self):
+        body = CelestialBody("Sun", 1E26,
+                             self.nonZero, self.nonZero2, self.nonZero3)
+        self.assertTrue(body.calcMomentum(1e26,Vector(4e4,0,0)) == Vector(4e30,0,0))
+
+    def test_ShouldReturnKineticEnergyWhenGivenMassAndVelocity(self):
+        body = CelestialBody("Sun", 1E26,
+                             self.nonZero, Vector(4e4,0,0) , self.nonZero3)
+        print(body.calcKineticEnergy())
+        self.assertTrue(System.nearly_equal(body.calcKineticEnergy(), 8e34, 5))
+       
+        
+        
+            
         
 if __name__ == '__main__':
     unittest.main()
