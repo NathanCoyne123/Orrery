@@ -48,8 +48,8 @@ class TestCelestialBody(unittest_vector.VectorTestCase):
 
     def test_ShouldReturnMomentumWhenGivenMassAndVelocity(self):
         body = CelestialBody("Sun", 1E26,
-                             self.nonZero, self.nonZero2, self.nonZero3)
-        self.assertTrue(body.calcMomentum(1e26,Vector(4e4,0,0)) == Vector(4e30,0,0))
+                             self.nonZero, Vector(4e4,0,0), self.nonZero3)
+        self.assertTrue(body.calcMomentum() == Vector(4e30,0,0))
 
     def test_ShouldReturnKineticEnergyWhenGivenMassAndVelocity(self):
         body = CelestialBody("Sun", 1E26,
