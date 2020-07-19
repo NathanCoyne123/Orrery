@@ -60,7 +60,7 @@ class TestSystem(unittest.TestCase):
             self.assertTrue(new_distance < distance)
             distance = new_distance
 
-    def test_ShouldNotAccelerateASmallBodyWithLargeStartingVelocityTowardsABigOne(self):
+    def test_ShouldAllowEscapeOfSmallBodyWithHighVelocity(self):
         body1 = CelestialBody("N",6e24,Vector(0,0,0),self.zero,self.zero)
         body2 = CelestialBody("M",1e3,Vector(1e7,0,0),Vector(0,3e8,0),self.zero)
         system = System("Dual Body", [body1,body2])
@@ -71,18 +71,18 @@ class TestSystem(unittest.TestCase):
             self.assertTrue(new_distance > distance)
             distance = new_distance
 
-    def test_ShouldKeepASmallBodyInOrbitWhenTravellingAtOrbitalVelocity(self):
+    """def test_ShouldKeepASmallBodyInOrbitWhenTravellingAtOrbitalVelocity(self):
         body1 = CelestialBody("N",5.97219e24,Vector(0,0,0),self.zero,self.zero)
         body2 = CelestialBody("M",1e3,Vector(6.57814e6,0,0),Vector(0,7820,0),self.zero)
         system = System("Dual Body", [body1,body2])
         distance = 6.57814e6
-        """for ts in range(1,10*60*1000):
+        for ts in range(1,10*60*1000):
             system.update(0.1)
             new_distance = CelestialBody.calcDistance(body1,body2)
             new_speed = body2.calcSpeed()
             if ts % 600 == 0:
                 print("t={}, r={}, v = {}".format(ts/10, new_distance, new_speed))
-            self.assertTrue(system.nearly_equal(distance,new_distance,0))
+            #self.assertTrue(system.nearly_equal(distance,new_distance,0))
             distance = new_distance"""
 
     def test_ShouldMoveThreeBodiesOfEqualMassTowardsCenterOfMass(self):
@@ -95,7 +95,35 @@ class TestSystem(unittest.TestCase):
         self.assertTrue(Vector.absolute(body1.position) == Vector.absolute(body2.position))
         self.assertTrue(Vector.absolute(body1.position) == Vector.absolute(body3.position))
 
-    def test_      
+    def test_ShouldConserveMomentum(self):
+        body1 = CelestialBody("N", 6e24, Vector(0, 10e10, 0), Vector(3,6,9), self.zero)
+        body2 = CelestialBody("M", 6e24, Vector(-6e10, -8e10, 0), Vector(5,12,3), self.zero)
+        body3 = CelestialBody("L", 6e24, Vector(6e10, -8e10, 0), Vector(9,2,19), self.zero)
+        bodies = [body1,body2,body3]
+        system = System("Tri-body", bodies)
+        totalMomentumBefore = Vector(0,0,0)
+        for body in bodies:
+            totalMomentumBefore = Vector.add(totalMomentumBefore, body.calcMomentum())
+        system.update(600)
+        totalMomentumAfter = Vector(0,0,0)
+        for body in bodies:
+            totalMomentumAfter = Vector.add(totalMomentumAfter, body.calcMomentum())
+        self.assertTrue(totalMomentumBefore == totalMomentumAfter)
+
+    def test_ShouldConserveEnergy(self):
+        self.assertTrue(False)
+
+    def test_ShouldSlingshot(self):
+        self.assertTrue(False)
+
+
+
+
+
+
+
+
+
             
 
    

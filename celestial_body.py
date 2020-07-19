@@ -36,8 +36,8 @@ class CelestialBody(object):
         speed = Vector.absolute(self.velocity)
         return speed
 
-    def calcMomentum(self,mass,velocity):
-        return Vector.mult(mass,velocity)
+    def calcMomentum(self):
+        return Vector.mult(self.mass,self.velocity)
     
     def calcKineticEnergy(self):
         velocity_squared = Vector.dot(self.velocity,self.velocity) 

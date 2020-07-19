@@ -29,10 +29,9 @@ class System(object):
             body.updateWithAcceleration(time_interval,acceleration)
             
     @staticmethod
-    def nearly_equal(a,b,sig_fig=5):
-            return ( a==b or 
-            int(a*10**sig_fig) == int(b*10**sig_fig))
-            
+    def nearly_equal(a, b, percent):
+        return a == b or abs(a/b - 1) < percent/100
+
             
             
     

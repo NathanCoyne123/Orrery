@@ -55,7 +55,7 @@ class TestCelestialBody(unittest_vector.VectorTestCase):
         body = CelestialBody("Sun", 1E26,
                              self.nonZero, Vector(4e4,0,0) , self.nonZero3)
         print(body.calcKineticEnergy())
-        self.assertTrue(System.nearly_equal(body.calcKineticEnergy(), 8e34, 5))
+        self.assertTrue(System.nearly_equal(body.calcKineticEnergy(), 8e34, 1e-4))
        
         
         
